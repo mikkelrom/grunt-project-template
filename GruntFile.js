@@ -3,9 +3,8 @@
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         jshint: {
-            files: ['Gruntfile.js', 'js/*.js', 'test/**/*.js'],
+            files: ['Gruntfile.js', 'js/*.js'],
             options: {
-                // options here to override JSHint defaults
                 globals: {
                     jQuery: true,
                     console: true,
@@ -26,9 +25,13 @@
                 browsers: ['last 2 versions']
             },
             dist: {
-                files: {
-                    'dist/main.css': 'dist/main.css'
-                }
+                src: 'dist/main.css'
+            }
+        },
+        cssmin: {
+            dist: {
+                src: ['<%= autoprefixer.dist.src %>'],
+                dest: 'dist/main.min.css'
             }
         },
         concat: {
@@ -50,21 +53,22 @@
                 }
             }
         },
-        cssmin: {
-            task: {
-                src: ['dist/main.css'],
-                dest: 'dist/main.min.css'
-            }
+        watch: {
+            files: ['css/**/*', 'js/**/*', '*.html'],
+            tasks: ['default'],
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-autoprefixer');
 
     grunt.registerTask('default', ['jshint', 'less', 'autoprefixer', 'concat', 'uglify', 'cssmin']);
+
+    grunt.registerTask('dev', ['default', 'watch']);
 
 };

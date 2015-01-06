@@ -1,7 +1,7 @@
 {
-  "name": "gruntfiletemplate",
+  "name": "GruntProjectTemplate",
   "version": "1.0.0",
-  "description": "",
+  "description": "Template project structure for quick start with grunt. Used grunt plugins: grunt-contrib-less, grunt-contrib-cssmin, grunt-autoprefixer, grunt-contrib-concat, grunt-contrib-jshint, grunt-contrib-uglify, grunt-contrib-watch",
   "author": "Mikkel Rom Engholm",
   "license": "MIT",
   "devDependencies": {
